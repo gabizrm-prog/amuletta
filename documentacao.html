@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amuletta — Documentação</title>
+<meta name="description" content="Documentação do aplicativo Amuletta: funções, usuários, resultados esperados e principais telas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23B3122E' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 100 L30 68 A16 16 0 0 1 60 48 A16 16 0 0 1 90 68 Z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="doc">
+
+  <header class="doc-header">
+    <a href="index.html" class="logo">AMULETTA</a>
+    <nav class="doc-nav" aria-label="Seções">
+      <a href="#funcoes">Funções</a>
+      <a href="#detalhes">Detalhamento</a>
+      <a href="#fluxo">Fluxo</a>
+      <a href="#telas">Telas</a>
+    </nav>
+    <a href="index.html" class="btn btn-solid doc-cta">Abrir o site</a>
+  </header>
+
+  <main>
+    <section class="doc-hero">
+      <span class="eyebrow">Documentação do aplicativo</span>
+      <h1>Amuletta: <em>loja virtual de acessórios</em></h1>
+      <p>A Amuletta é uma aplicação web responsiva de e-commerce para uma marca (fictícia) de acessórios femininos. Pelo celular ou pelo computador, a cliente navega pelo catálogo, encontra as peças que procura, guarda favoritas, monta a sacola e finaliza a compra.</p>
+      <div class="doc-facts">
+        <div><span>Tipo</span><strong>Aplicação web (e-commerce)</strong></div>
+        <div><span>Usuário principal</span><strong>Cliente da loja</strong></div>
+        <div><span>Plataformas</span><strong>Computador e celular</strong></div>
+        <div><span>Tecnologias</span><strong>HTML, CSS e JavaScript</strong></div>
+      </div>
+    </section>
+
+    <!-- Usuários -->
+    <section class="doc-section">
+      <h2>Quem utiliza o aplicativo</h2>
+      <div class="users">
+        <article class="user-card">
+          <span class="user-tag">Usuário principal</span>
+          <h3>Cliente / visitante</h3>
+          <p>Pessoa que procura acessórios (colares, brincos, anéis, pulseiras, bolsas e acessórios de cabelo) para uso próprio ou para presentear. Usa todas as funções: navega, busca, filtra, favorita, compra e se cadastra na newsletter. Não precisa criar conta para comprar.</p>
+        </article>
+        <article class="user-card">
+          <span class="user-tag user-tag-soft">Usuário indireto</span>
+          <h3>Equipe da loja</h3>
+          <p>Recebe os pedidos finalizados (número, itens, total, forma de pagamento e dados de entrega) e a lista de e-mails da newsletter, usada para divulgar lançamentos e promoções.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Resumo das funções -->
+    <section class="doc-section" id="funcoes">
+      <h2>Principais funções</h2>
+      <p class="doc-lead">O aplicativo tem oito funções principais. A tabela resume para que serve cada uma, quem usa, o resultado esperado e como esse resultado aparece na tela.</p>
+      <div class="table-wrap">
+        <table class="doc-table">
+          <thead>
+            <tr><th>Função</th><th>Para que serve</th><th>Usuário</th><th>Resultado esperado</th><th>Como é apresentado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="#f1">1. Catálogo de produtos</a></td><td>Mostrar as peças à venda</td><td>Cliente</td><td>Cliente conhece produtos e preços</td><td>Grade de cards com imagem, nome, preço e parcelamento</td></tr>
+            <tr><td><a href="#f2">2. Busca</a></td><td>Encontrar uma peça pelo nome</td><td>Cliente</td><td>Só os produtos que correspondem ao texto</td><td>Grade atualizada a cada letra e contador de resultados</td></tr>
+            <tr><td><a href="#f3">3. Filtro por categoria</a></td><td>Ver só um tipo de acessório</td><td>Cliente</td><td>Lista restrita à categoria escolhida</td><td>Botão da categoria destacado em vermelho e grade filtrada</td></tr>
+            <tr><td><a href="#f4">4. Ordenação</a></td><td>Organizar a lista por critério</td><td>Cliente</td><td>Produtos na ordem escolhida</td><td>Grade reorganizada</td></tr>
+            <tr><td><a href="#f5">5. Detalhes do produto</a></td><td>Ver informações completas de uma peça</td><td>Cliente</td><td>Cliente decide se compra</td><td>Janela sobreposta com imagem ampliada e descrição</td></tr>
+            <tr><td><a href="#f6">6. Favoritos</a></td><td>Guardar peças para ver depois</td><td>Cliente</td><td>Lista de peças salvas</td><td>Coração preenchido, número no ícone e painel lateral</td></tr>
+            <tr><td><a href="#f7">7. Sacola de compras</a></td><td>Reunir as peças que serão compradas</td><td>Cliente</td><td>Itens, quantidades e valores calculados</td><td>Painel lateral com lista, barra de frete grátis e resumo de valores</td></tr>
+            <tr><td><a href="#f8">8. Finalizar compra</a></td><td>Concluir o pedido</td><td>Cliente (e equipe da loja, que recebe o pedido)</td><td>Pedido registrado com número</td><td>Formulário e tela de confirmação com número do pedido</td></tr>
+            <tr><td><a href="#f9">Extra: Newsletter</a></td><td>Cadastrar e-mail para receber novidades</td><td>Cliente (e equipe de marketing)</td><td>E-mail cadastrado</td><td>Aviso de confirmação na parte de baixo da tela</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Detalhamento -->
+    <section class="doc-section" id="detalhes">
+      <h2>Detalhamento de cada função</h2>
+
+      <article class="fn" id="f1">
+        <div class="fn-head"><span class="fn-num">1</span><h3>Catálogo de produtos (vitrine)</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Apresentar todos os produtos à venda de forma visual e organizada, para a cliente conhecer a coleção.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente / visitante, logo ao abrir o site.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>Ao abrir o site, a página inicial mostra o destaque da coleção, os círculos de "Compre por categoria" e a grade do catálogo.</li><li>Cada produto aparece num card com imagem, categoria, nome, preço, parcelamento e o selo <b>NOVO</b> quando é lançamento.</li><li>Cada card tem os botões "Adicionar à sacola" e favoritar (coração).</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>A cliente vê rapidamente quais peças existem, quanto custam e quais são novidades.</p></div>
+          <div><h4>Como é apresentado</h4><p>Grade de cards (4 colunas no computador e 2 no celular) com o contador "8 produtos" acima.</p></div>
+        </div>
+        <a class="fn-link" href="index.html">Ver tela ao vivo →</a>
+      </article>
+
+      <article class="fn" id="f2">
+        <div class="fn-head"><span class="fn-num">2</span><h3>Busca</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Encontrar uma peça específica sem precisar percorrer o catálogo inteiro.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente que já sabe o que procura (ex.: "colar", "argola").</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>A cliente digita no campo "Buscar acessórios", no topo da página.</li><li>A lista é filtrada a cada letra digitada, comparando o texto com o nome e a categoria. Acentos e letras maiúsculas são ignorados ("aneis" encontra "Anéis").</li><li>Ao apertar Enter, a página rola até o catálogo.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>Só os produtos que correspondem à busca aparecem.</p></div>
+          <div><h4>Como é apresentado</h4><p>Grade atualizada na hora e contador de resultados ("2 produtos"). Se nada for encontrado, aparece a mensagem "Nenhum produto encontrado".</p></div>
+        </div>
+        <a class="fn-link" href="index.html?tela=busca">Ver tela ao vivo →</a>
+      </article>
+
+      <article class="fn" id="f3">
+        <div class="fn-head"><span class="fn-num">3</span><h3>Filtro por categoria</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Mostrar só um tipo de acessório: Novidades, Colares, Brincos, Anéis, Pulseiras, Bolsas ou Cabelo.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente que quer explorar um tipo de peça.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>A cliente escolhe a categoria por um dos três caminhos: os botões acima da grade, os círculos de "Compre por categoria" ou o menu do topo.</li><li>A grade passa a mostrar só os produtos daquela categoria. O botão "Todos" volta à lista completa.</li><li>O filtro pode ser combinado com a busca e com a ordenação.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>Lista restrita à categoria escolhida.</p></div>
+          <div><h4>Como é apresentado</h4><p>O botão da categoria ativa fica preenchido em vermelho, a grade é atualizada e o contador mostra quantos produtos existem nela.</p></div>
+        </div>
+        <a class="fn-link" href="index.html?tela=catalogo">Ver tela ao vivo →</a>
+      </article>
+
+      <article class="fn" id="f4">
+        <div class="fn-head"><span class="fn-num">4</span><h3>Ordenação</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Organizar os produtos pelo critério mais útil para a cliente.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente comparando preços ou procurando lançamentos.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>No seletor "Ordenar por", a cliente escolhe: <b>Mais vendidos</b>, <b>Novidades</b>, <b>Menor preço</b> ou <b>Maior preço</b>.</li><li>O botão "Mais vendidos" da página inicial também aplica essa ordenação.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>Produtos exibidos na ordem escolhida.</p></div>
+          <div><h4>Como é apresentado</h4><p>A grade é reorganizada na hora, mantendo filtro e busca ativos.</p></div>
+        </div>
+      </article>
+
+      <article class="fn" id="f5">
+        <div class="fn-head"><span class="fn-num">5</span><h3>Detalhes do produto</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Dar todas as informações de uma peça antes da compra.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente interessada em um produto.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>A cliente toca na imagem ou no nome do produto.</li><li>Abre uma janela com imagem ampliada, categoria, nome, preço, parcelamento sem juros, descrição (material, tamanho) e vantagens: frete grátis, troca fácil e embalagem para presente.</li><li>Na própria janela é possível adicionar à sacola e favoritar. A janela fecha pelo X, pela tecla Esc ou clicando fora dela.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>A cliente tem informação suficiente para decidir se compra.</p></div>
+          <div><h4>Como é apresentado</h4><p>Janela sobreposta (modal) dividida em imagem e informações. No celular, ocupa a tela inteira.</p></div>
+        </div>
+        <a class="fn-link" href="index.html?tela=produto">Ver tela ao vivo →</a>
+      </article>
+
+      <article class="fn" id="f6">
+        <div class="fn-head"><span class="fn-num">6</span><h3>Favoritos</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Guardar peças de interesse para comparar ou comprar depois.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente que ainda está decidindo.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>A cliente toca no coração de um produto (no card ou na janela de detalhes). Tocar de novo desfaz.</li><li>O ícone de coração do topo (ou "Meus favoritos", no menu do celular) abre o painel de favoritos.</li><li>No painel, cada peça pode ir direto para a sacola ou ser removida.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>Lista com as peças salvas pela cliente.</p></div>
+          <div><h4>Como é apresentado</h4><p>Coração preenchido em vermelho no produto, número de favoritos sobre o ícone do topo e painel lateral com a lista.</p></div>
+        </div>
+        <a class="fn-link" href="index.html?tela=favoritos">Ver tela ao vivo →</a>
+      </article>
+
+      <article class="fn" id="f7">
+        <div class="fn-head"><span class="fn-num">7</span><h3>Sacola de compras</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Reunir as peças que a cliente quer comprar e mostrar quanto vai pagar.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente pronta para comprar.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>"Adicionar à sacola" coloca o produto na sacola. O botão muda para "Na sacola ✓" e aparece um aviso de confirmação.</li><li>O ícone da sacola no topo abre o painel, onde é possível aumentar ou diminuir a quantidade (− / +) e remover itens.</li><li>O sistema calcula automaticamente o subtotal, o frete (grátis acima de R$ 199, senão R$ 19,90) e o total.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>Itens, quantidades e valores sempre corretos e atualizados.</p></div>
+          <div><h4>Como é apresentado</h4><p>Contador de itens sobre o ícone da sacola, aviso na tela ao adicionar e painel lateral com a lista. O painel traz uma <b>barra de progresso</b> que mostra quanto falta para o frete grátis e o resumo de valores (subtotal, frete e total).</p></div>
+        </div>
+        <a class="fn-link" href="index.html?tela=sacola">Ver tela ao vivo →</a>
+      </article>
+
+      <article class="fn" id="f8">
+        <div class="fn-head"><span class="fn-num">8</span><h3>Finalizar compra (checkout)</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Concluir o pedido com os dados de entrega e a forma de pagamento.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente, que preenche o pedido. A equipe da loja recebe o pedido para separar e enviar.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>Na sacola, a cliente toca em "Finalizar compra".</li><li>Preenche nome, e-mail e CEP e escolhe o pagamento: Pix, cartão de crédito ou boleto.</li><li>O sistema valida os campos (e-mail válido, CEP com 8 dígitos). Se algo estiver errado, mostra o aviso e leva o cursor ao campo com problema.</li><li>Ao confirmar, o pedido recebe um número e a sacola é esvaziada.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>Pedido registrado e identificado por um número (ex.: #AM-482913).</p></div>
+          <div><h4>Como é apresentado</h4><p>Tela de confirmação com ícone de sucesso, número do pedido, itens comprados, frete, forma de pagamento e total.</p></div>
+        </div>
+        <a class="fn-link" href="index.html?tela=checkout">Ver tela ao vivo →</a>
+      </article>
+
+      <article class="fn" id="f9">
+        <div class="fn-head"><span class="fn-num">+</span><h3>Cadastro na newsletter</h3></div>
+        <div class="fn-grid">
+          <div><h4>Para que serve</h4><p>Cadastrar o e-mail da cliente para receber lançamentos, reposições e ofertas.</p></div>
+          <div><h4>Quem utiliza</h4><p>Cliente, que se cadastra. A equipe de marketing usa a lista de e-mails.</p></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>No bloco "Receba novidades em primeira mão", a cliente digita o e-mail e toca em "Quero receber".</li><li>O sistema confere se o formato do e-mail é válido antes de aceitar.</li></ol></div>
+          <div><h4>Resultado esperado</h4><p>E-mail cadastrado na lista de novidades.</p></div>
+          <div><h4>Como é apresentado</h4><p>Aviso "Pronto! Você vai receber nossas novidades." na parte de baixo da tela, com o campo limpo.</p></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Fluxo -->
+    <section class="doc-section" id="fluxo">
+      <h2>Fluxo de compra</h2>
+      <p class="doc-lead">Caminho típico da cliente, da página inicial até o pedido confirmado.</p>
+      <ol class="flow">
+        <li><span>1</span>Página inicial</li>
+        <li><span>2</span>Busca ou filtro</li>
+        <li><span>3</span>Detalhes do produto</li>
+        <li><span>4</span>Sacola</li>
+        <li><span>5</span>Finalizar compra</li>
+        <li><span>6</span>Pedido confirmado</li>
+      </ol>
+    </section>
+
+    <!-- Telas -->
+    <section class="doc-section" id="telas">
+      <h2>Principais telas</h2>
+      <p class="doc-lead">Capturas do aplicativo funcionando. Clique em qualquer tela para abri-la ao vivo.</p>
+
+      <h3 class="screens-title">Computador</h3>
+      <div class="screens">
+        <figure><a href="index.html"><img src="telas/01-inicio.png" alt="Página inicial com destaque da coleção" loading="lazy"></a><figcaption><b>1. Página inicial</b>Destaque da coleção, menu, busca, favoritos e sacola.</figcaption></figure>
+        <figure><a href="index.html?tela=catalogo"><img src="telas/02-catalogo.png" alt="Catálogo filtrado pela categoria Colares" loading="lazy"></a><figcaption><b>2. Catálogo com filtro</b>Categoria "Colares" selecionada e grade filtrada.</figcaption></figure>
+        <figure><a href="index.html?tela=busca"><img src="telas/03-busca.png" alt="Resultado da busca por brinco" loading="lazy"></a><figcaption><b>3. Busca</b>Resultado da busca por "brinco".</figcaption></figure>
+        <figure><a href="index.html?tela=produto"><img src="telas/04-produto.png" alt="Janela de detalhes do produto" loading="lazy"></a><figcaption><b>4. Detalhes do produto</b>Imagem ampliada, descrição, preço e ações.</figcaption></figure>
+        <figure><a href="index.html?tela=favoritos"><img src="telas/05-favoritos.png" alt="Painel de favoritos" loading="lazy"></a><figcaption><b>5. Favoritos</b>Peças salvas, com atalho para a sacola.</figcaption></figure>
+        <figure><a href="index.html?tela=sacola"><img src="telas/06-sacola.png" alt="Sacola de compras com dois produtos" loading="lazy"></a><figcaption><b>6. Sacola</b>Quantidades, barra de frete grátis e resumo de valores.</figcaption></figure>
+        <figure><a href="index.html?tela=checkout"><img src="telas/07-checkout.png" alt="Formulário de finalizar compra" loading="lazy"></a><figcaption><b>7. Finalizar compra</b>Dados de entrega e forma de pagamento.</figcaption></figure>
+        <figure><a href="index.html?tela=confirmacao"><img src="telas/08-confirmacao.png" alt="Tela de pedido confirmado" loading="lazy"></a><figcaption><b>8. Pedido confirmado</b>Número do pedido, itens e total pago.</figcaption></figure>
+      </div>
+
+      <h3 class="screens-title">Celular</h3>
+      <div class="screens screens-mobile">
+        <figure><img src="telas/09-mobile-inicio.png" alt="Página inicial no celular" loading="lazy"><figcaption><b>Página inicial</b></figcaption></figure>
+        <figure><img src="telas/10-mobile-catalogo.png" alt="Catálogo no celular" loading="lazy"><figcaption><b>Catálogo</b></figcaption></figure>
+        <figure><img src="telas/12-mobile-produto.png" alt="Detalhes do produto no celular" loading="lazy"><figcaption><b>Detalhes do produto</b></figcaption></figure>
+        <figure><img src="telas/11-mobile-sacola.png" alt="Sacola no celular" loading="lazy"><figcaption><b>Sacola</b></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc-section doc-note">
+      <p><b>Observação:</b> este é um protótipo funcional. Os produtos, pedidos e cadastros são simulados no próprio navegador (não há servidor, banco de dados nem pagamento real). Numa versão de produção, essas funções seriam ligadas a um sistema de pedidos, a um meio de pagamento e a uma ferramenta de e-mail marketing.</p>
+    </section>
+  </main>
+
+  <footer class="footer doc-footer">
+    <div class="footer-bottom">
+      <span>© 2026 Amuletta · Protótipo de portfólio</span>
+      <span><a href="index.html">Voltar ao site</a> · Feito por <a href="https://gabizrm-prog.github.io">Gabriela</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>
