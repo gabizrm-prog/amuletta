@@ -454,3 +454,22 @@ body.no-scroll { overflow: hidden; }
   .screens-mobile { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .doc-footer { margin-top: 64px; }
 }
+
+/* Impressão / PDF da documentação */
+@media print {
+  @page { size: A4; margin: 14mm 12mm; }
+  .doc { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .doc-header { position: static; height: auto; padding: 0 0 12px; }
+  .doc-nav, .doc-cta, .fn-link, .doc-footer { display: none; }
+  .doc main { padding: 0; max-width: none; }
+  .doc-hero { padding-top: 24px; }
+  .doc-hero h1 { font-size: 44px; }
+  .doc-section { padding-top: 28px; }
+  .doc-section h2 { font-size: 32px; break-after: avoid; }
+  .fn, .user-card, .doc-table tr, .screens figure, .flow, .doc-facts, .doc-note { break-inside: avoid; }
+  .fn { padding: 20px 22px; gap: 14px; }
+  .fn-head h3 { font-size: 26px; }
+  .screens img { box-shadow: none; }
+  .screens-title { break-after: avoid; }
+  #telas { break-before: page; }
+}
