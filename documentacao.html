@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23B3122E' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M60 100 L30 68 A16 16 0 0 1 60 48 A16 16 0 0 1 90 68 Z'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body class="doc">
 
@@ -49,7 +49,7 @@
         <article class="user-card">
           <span class="user-tag user-tag-soft">Usuário indireto</span>
           <h3>Equipe da loja</h3>
-          <p>Recebe os pedidos finalizados (número, itens, total, forma de pagamento e dados de entrega) e a lista de e-mails da newsletter, usada para divulgar lançamentos e promoções.</p>
+          <p>Recebe os pedidos finalizados (número, itens, total, forma de pagamento e endereço de entrega) e a lista de e-mails da newsletter, usada para divulgar lançamentos e promoções.</p>
         </article>
       </div>
     </section>
@@ -170,9 +170,9 @@
         <div class="fn-grid">
           <div><h4>Para que serve</h4><p>Concluir o pedido com os dados de entrega e a forma de pagamento.</p></div>
           <div><h4>Quem utiliza</h4><p>Cliente, que preenche o pedido. A equipe da loja recebe o pedido para separar e enviar.</p></div>
-          <div class="fn-wide"><h4>Como funciona</h4><ol><li>Na sacola, a cliente toca em "Finalizar compra".</li><li>Preenche nome, e-mail e CEP e escolhe o pagamento: Pix, cartão de crédito ou boleto.</li><li>O sistema valida os campos (e-mail válido, CEP com 8 dígitos). Se algo estiver errado, mostra o aviso e leva o cursor ao campo com problema.</li><li>Ao confirmar, o pedido recebe um número e a sacola é esvaziada.</li></ol></div>
+          <div class="fn-wide"><h4>Como funciona</h4><ol><li>Na sacola, a cliente toca em "Finalizar compra".</li><li>Preenche nome, e-mail e o endereço de entrega. Ao digitar o CEP, rua, bairro, cidade e UF são preenchidos automaticamente (consulta ao serviço ViaCEP), e a cliente só completa o número e o complemento.</li><li>Escolhe o pagamento: Pix, cartão de crédito ou boleto.</li><li>O sistema valida os campos (e-mail válido, CEP com 8 dígitos, endereço completo). Se algo estiver errado, destaca os campos com problema em vermelho e leva o cursor ao primeiro deles.</li><li>Ao confirmar, o pedido recebe um número e a sacola é esvaziada.</li></ol></div>
           <div><h4>Resultado esperado</h4><p>Pedido registrado e identificado por um número (ex.: #AM-482913).</p></div>
-          <div><h4>Como é apresentado</h4><p>Tela de confirmação com ícone de sucesso, número do pedido, itens comprados, frete, forma de pagamento e total.</p></div>
+          <div><h4>Como é apresentado</h4><p>Tela de confirmação com ícone de sucesso, número do pedido, endereço de entrega, itens comprados, frete, forma de pagamento e total.</p></div>
         </div>
         <a class="fn-link" href="index.html?tela=checkout">Ver tela ao vivo →</a>
       </article>
@@ -216,8 +216,8 @@
         <figure><a href="index.html?tela=produto"><img src="telas/04-produto.png" alt="Janela de detalhes do produto" loading="lazy"></a><figcaption><b>4. Detalhes do produto</b>Imagem ampliada, descrição, preço e ações.</figcaption></figure>
         <figure><a href="index.html?tela=favoritos"><img src="telas/05-favoritos.png" alt="Painel de favoritos" loading="lazy"></a><figcaption><b>5. Favoritos</b>Peças salvas, com atalho para a sacola.</figcaption></figure>
         <figure><a href="index.html?tela=sacola"><img src="telas/06-sacola.png" alt="Sacola de compras com dois produtos" loading="lazy"></a><figcaption><b>6. Sacola</b>Quantidades, barra de frete grátis e resumo de valores.</figcaption></figure>
-        <figure><a href="index.html?tela=checkout"><img src="telas/07-checkout.png" alt="Formulário de finalizar compra" loading="lazy"></a><figcaption><b>7. Finalizar compra</b>Dados de entrega e forma de pagamento.</figcaption></figure>
-        <figure><a href="index.html?tela=confirmacao"><img src="telas/08-confirmacao.png" alt="Tela de pedido confirmado" loading="lazy"></a><figcaption><b>8. Pedido confirmado</b>Número do pedido, itens e total pago.</figcaption></figure>
+        <figure><a href="index.html?tela=checkout"><img src="telas/07-checkout.png" alt="Formulário de finalizar compra" loading="lazy"></a><figcaption><b>7. Finalizar compra</b>Endereço preenchido pelo CEP e forma de pagamento.</figcaption></figure>
+        <figure><a href="index.html?tela=confirmacao"><img src="telas/08-confirmacao.png" alt="Tela de pedido confirmado" loading="lazy"></a><figcaption><b>8. Pedido confirmado</b>Número do pedido, endereço, itens e total.</figcaption></figure>
       </div>
 
       <h3 class="screens-title">Celular</h3>

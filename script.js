@@ -250,15 +250,39 @@ function renderCheckoutStep() {
       <label class="field">E-mail
         <input name="email" type="email" required autocomplete="email" placeholder="seu@email.com">
       </label>
+      <span class="form-section">Endereço de entrega</span>
       <label class="field">CEP
-        <input name="cep" required inputmode="numeric" pattern="\\d{5}-?\\d{3}" placeholder="00000-000" maxlength="9">
+        <input name="cep" id="cep" required inputmode="numeric" pattern="\\d{5}-?\\d{3}" placeholder="00000-000" maxlength="9" autocomplete="postal-code">
+        <span class="field-hint" id="cep-hint">Digite o CEP para preencher o endereço.</span>
       </label>
+      <label class="field">Rua / avenida
+        <input name="rua" required autocomplete="address-line1" placeholder="Nome da rua">
+      </label>
+      <div class="field-row">
+        <label class="field">Número
+          <input name="numero" required inputmode="numeric" placeholder="123">
+        </label>
+        <label class="field">Complemento
+          <input name="complemento" autocomplete="address-line2" placeholder="Apto, bloco (opcional)">
+        </label>
+      </div>
+      <label class="field">Bairro
+        <input name="bairro" required placeholder="Bairro">
+      </label>
+      <div class="field-row field-row-uf">
+        <label class="field">Cidade
+          <input name="cidade" required autocomplete="address-level2" placeholder="Cidade">
+        </label>
+        <label class="field">UF
+          <input name="uf" required maxlength="2" pattern="[A-Za-z]{2}" autocomplete="address-level1" placeholder="SP">
+        </label>
+      </div>
       <fieldset class="pay">
         <legend>Forma de pagamento</legend>
         ${Object.entries(PAGAMENTOS).map(([v, label], i) => `
           <label class="pay-option"><input type="radio" name="pagamento" value="${v}"${i === 0 ? ' checked' : ''}> ${label}</label>`).join('')}
       </fieldset>
-      <p class="form-error" id="form-error" hidden>Preencha nome, e-mail e CEP corretamente.</p>
+      <p class="form-error" id="form-error" hidden>Preencha os campos destacados corretamente.</p>
     </form>`;
   drawerFoot.innerHTML = `
     <div class="totals">
@@ -278,6 +302,11 @@ function renderDoneStep() {
       <span class="done-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
       <strong class="done-title">Obrigada, ${o.nome.split(' ')[0]}!</strong>
       <span class="muted">Seu pedido <strong class="order-num">${o.num}</strong> foi recebido. Enviamos os detalhes para ${o.email}.</span>
+    </div>
+    <div class="order-address">
+      <span class="form-section">Entrega em</span>
+      <span>${o.rua}, ${o.numero}${o.complemento ? ' — ' + o.complemento : ''}</span>
+      <span>${o.bairro} · ${o.cidade}/${o.uf.toUpperCase()} · CEP ${o.cep}</span>
     </div>
     <div class="order-items">
       ${o.items.map((it) => `<div><span>${it.qty}× ${it.name}</span><span>${brl(it.price * it.qty)}</span></div>`).join('')}
@@ -342,11 +371,11 @@ function closeDrawer() {
   document.body.classList.remove('no-scroll');
 }
 
-function placeOrder({ nome, email, pagamento }) {
+function placeOrder(data) {
   const t = totals();
   state.order = {
+    ...data,
     num: '#AM-' + String(Date.now()).slice(-6),
-    nome, email, pagamento,
     items: [...state.cart].map(([id, qty]) => ({ name: byId(id).name, price: byId(id).price, qty })),
     frete: t.frete, total: t.total
   };
@@ -440,6 +469,7 @@ document.addEventListener('submit', (e) => {
   e.preventDefault();
   const form = e.target;
   const error = $('#form-error');
+  form.classList.add('validated');
   if (!form.checkValidity()) {
     error.hidden = false;
     form.querySelector(':invalid').focus();
@@ -449,6 +479,33 @@ document.addEventListener('submit', (e) => {
   placeOrder(data);
   render();
 });
+
+// CEP: máscara 00000-000 e preenchimento automático do endereço (ViaCEP)
+document.addEventListener('input', (e) => {
+  if (e.target.id !== 'cep') return;
+  const digits = e.target.value.replace(/\D/g, '').slice(0, 8);
+  e.target.value = digits.length > 5 ? digits.slice(0, 5) + '-' + digits.slice(5) : digits;
+  if (digits.length === 8) buscarCep(digits);
+});
+
+async function buscarCep(cep) {
+  const hint = $('#cep-hint');
+  const form = $('#checkout-form');
+  hint.textContent = 'Buscando endereço…';
+  try {
+    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const data = await res.json();
+    if (data.erro) throw new Error('CEP não encontrado');
+    form.rua.value = data.logradouro || '';
+    form.bairro.value = data.bairro || '';
+    form.cidade.value = data.localidade || '';
+    form.uf.value = data.uf || '';
+    hint.textContent = 'Endereço encontrado. Confira e informe o número.';
+    (data.logradouro ? form.numero : form.rua).focus();
+  } catch {
+    hint.textContent = 'Não encontramos esse CEP. Preencha o endereço manualmente.';
+  }
+}
 
 sortSelect.addEventListener('change', () => {
   state.sort = sortSelect.value;
@@ -512,10 +569,19 @@ const DEMOS = {
   produto() { openModal(1); },
   favoritos() { [1, 3, 7].forEach((id) => state.favs.add(id)); render(); openDrawer('favs'); },
   sacola() { state.cart.set(1, 1).set(4, 2); render(); openDrawer('cart'); },
-  checkout() { state.cart.set(1, 1).set(4, 2); state.step = 'checkout'; render(); openDrawer('cart'); },
+  checkout() {
+    state.cart.set(1, 1).set(4, 2);
+    state.step = 'checkout';
+    render();
+    openDrawer('cart');
+    const f = $('#checkout-form');
+    [['nome', 'Ana Souza'], ['email', 'ana@email.com'], ['cep', '01310-100'], ['rua', 'Avenida Paulista'], ['numero', '1000'], ['complemento', 'Apto 52'], ['bairro', 'Bela Vista'], ['cidade', 'São Paulo'], ['uf', 'SP']]
+      .forEach(([k, v]) => { f.elements[k].value = v; });
+    $('#cep-hint').textContent = 'Endereço encontrado. Confira e informe o número.';
+  },
   confirmacao() {
     state.cart.set(1, 1).set(4, 2);
-    placeOrder({ nome: 'Ana Souza', email: 'ana@email.com', pagamento: 'pix' });
+    placeOrder({ nome: 'Ana Souza', email: 'ana@email.com', pagamento: 'pix', cep: '01310-100', rua: 'Avenida Paulista', numero: '1000', complemento: 'Apto 52', bairro: 'Bela Vista', cidade: 'São Paulo', uf: 'SP' });
     state.order.num = '#AM-482913';
     render();
     state.drawer = 'cart';
