@@ -1,0 +1,10 @@
+.git
+.github
+**/__pycache__
+**/*.pyc
+**/*.db
+**/*.db-journal
+sistema/entrega
+sistema/docs
+sistema/tests
+README.md

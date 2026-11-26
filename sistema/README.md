@@ -2,7 +2,9 @@
 
 Projeto Integrador, fase **Implementação: bases do sistema (login e cadastro base / CRUD)**.
 
-Aplicação desktop em **Python 3 + SQLite + Tkinter** para a equipe da loja Amuletta (acessórios femininos) entrar com login e manter o cadastro de produtos que aparecem na loja virtual ([protótipo do site](https://gabizrm-prog.github.io/amuletta/)).
+Sistema da equipe da loja Amuletta (acessórios femininos): login e cadastro dos produtos que aparecem na loja virtual.
+
+> **Versão atual: web (Flask) rodando em Docker** — veja o [README principal](../README.md) para gerar a imagem e executar o container. As telas web estão em [`docs/telas-web/`](docs/telas-web/). O texto abaixo descreve a primeira versão (desktop, Tkinter), que continua no projeto (`python main.py`).
 
 ## Telas
 

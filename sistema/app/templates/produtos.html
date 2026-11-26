@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block titulo %}Produtos{% endblock %}
+{% block corpo %}
+<header class="topo">
+  <span class="logo logo-pequeno">AMULETTA</span>
+  <nav class="topo-nav">
+    <a href="{{ url_for('produtos_lista') }}" class="ativo">Produtos</a>
+    <a href="/" target="_blank" rel="noopener">Ver loja ↗</a>
+  </nav>
+  <div class="topo-usuario">
+    <span>{{ session.usuario.nome }} <small>({{ session.usuario.perfil }})</small></span>
+    <form method="post" action="{{ url_for('sair') }}">
+      <input type="hidden" name="csrf" value="{{ token_csrf() }}">
+      <button type="submit" class="botao-linha">Sair</button>
+    </form>
+  </div>
+</header>
+
+<main class="painel">
+  <section class="lista">
+    <div class="lista-cabecalho">
+      <h1>Cadastro de produtos</h1>
+      <span class="muted">{{ itens|length }} produto{{ '' if itens|length == 1 else 's' }}</span>
+    </div>
+    <form method="get" class="filtros">
+      <input type="search" name="q" value="{{ busca }}" placeholder="Buscar por nome ou descrição">
+      <select name="categoria">
+        <option value="">Todas as categorias</option>
+        {% for c in categorias %}
+          <option value="{{ c.id }}" {{ 'selected' if categoria_filtro == c.id }}>{{ c.nome }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="botao-linha">Filtrar</button>
+      {% if busca or categoria_filtro %}<a href="{{ url_for('produtos_lista') }}">Limpar</a>{% endif %}
+    </form>
+    {% for categoria, mensagem in get_flashed_messages(with_categories=true) %}
+      <div class="alerta alerta-{{ categoria }}" role="alert">{{ mensagem }}</div>
+    {% endfor %}
+    <table>
+      <thead>
+        <tr><th>Cód.</th><th>Produto</th><th>Categoria</th><th class="num">Preço</th><th class="num">Estoque</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for p in itens %}
+        <tr class="{{ 'selecionado' if editando == p.id }}">
+          <td>{{ p.id }}</td>
+          <td>{{ p.nome }} {% if p.lancamento %}<span class="selo">NOVO</span>{% endif %}</td>
+          <td>{{ p.categoria }}</td>
+          <td class="num">{{ p.preco|brl }}</td>
+          <td class="num {{ 'zerado' if p.estoque == 0 }}">{{ p.estoque }}</td>
+          <td class="acoes"><a href="{{ url_for('produtos_lista', editar=p.id) }}">Editar</a></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="vazio">Nenhum produto encontrado.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="muted nota">Produtos com estoque 0 não aparecem na loja virtual.</p>
+  </section>
+
+  <aside class="formulario">
+    <h2>{{ 'Alterar produto #' ~ editando if editando else 'Novo produto' }}</h2>
+    <form method="post" action="{{ url_for('produtos_alterar', produto_id=editando) if editando else url_for('produtos_incluir') }}" class="form">
+      <input type="hidden" name="csrf" value="{{ token_csrf() }}">
+      <label>Nome
+        <input name="nome" value="{{ form.nome or '' }}" maxlength="80" required>
+      </label>
+      <label>Categoria
+        <select name="categoria_id" required>
+          <option value="">Selecione</option>
+          {% for c in categorias %}
+            <option value="{{ c.id }}" {{ 'selected' if form.categoria_id|string == c.id|string }}>{{ c.nome }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <div class="duas-colunas">
+        <label>Preço (R$)
+          <input name="preco" value="{{ form.preco or '' }}" inputmode="decimal" placeholder="129,90" required>
+        </label>
+        <label>Estoque
+          <input name="estoque" type="number" min="0" step="1" value="{{ form.estoque if form.estoque is not none else '' }}" required>
+        </label>
+      </div>
+      <label>Descrição
+        <textarea name="descricao" rows="4">{{ form.descricao or '' }}</textarea>
+      </label>
+      <label class="check"><input type="checkbox" name="lancamento" {{ 'checked' if form.lancamento }}> Lançamento (selo NOVO na loja)</label>
+      <div class="botoes">
+        <button type="submit" class="botao">{{ 'Salvar alterações' if editando else 'Incluir produto' }}</button>
+        {% if editando %}<a href="{{ url_for('produtos_lista') }}" class="botao-linha">Cancelar</a>{% endif %}
+      </div>
+    </form>
+    {% if editando %}
+    <form method="post" action="{{ url_for('produtos_excluir', produto_id=editando) }}" class="excluir"
+          onsubmit="return confirm('Excluir este produto? Essa ação não pode ser desfeita.')">
+      <input type="hidden" name="csrf" value="{{ token_csrf() }}">
+      <button type="submit" class="botao-perigo">Excluir produto</button>
+    </form>
+    {% endif %}
+  </aside>
+</main>
+{% endblock %}
