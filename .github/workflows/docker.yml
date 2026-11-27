@@ -1,0 +1,41 @@
+name: Testes e imagem Docker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r sistema/requirements.txt
+      - name: Testes automatizados
+        working-directory: sistema
+        run: python -m unittest -v
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: testes
+    steps:
+      - uses: actions/checkout@v4
+      - name: docker build
+        run: docker build -t amuletta .
+      - name: docker container run
+        run: docker container run -d -p 8000:8000 --name amuletta amuletta
+      - name: Confere loja, login e API no container
+        run: |
+          for i in $(seq 1 20); do curl -fs http://localhost:8000/admin/login > /dev/null && break; sleep 1; done
+          curl -fs http://localhost:8000/ | grep -q AMULETTA
+          curl -fs http://localhost:8000/admin/login | grep -q "Entrar"
+          curl -fs http://localhost:8000/api/produtos | grep -q "Colar"
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8000/admin/produtos)" = "302"
+          echo "Container respondendo corretamente"
+      - name: Logs do container
+        if: always()
+        run: docker logs amuletta
